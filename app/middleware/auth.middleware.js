@@ -6,14 +6,15 @@ import { prisma } from '../prisma.js'
 export const checkedAuth = asyncHandler(async (req, res, next) => {
 	let token
 
-	if (req.authorization?.startsWith('Bearer')) {
-		token = req.authorization.header.split(' ')[1]
+	if (req.headers.authorization?.startsWith('Bearer')) {
+		token = req.headers.authorization.split(' ')[1]
 
 		const decoded = jwt.verify(token, process.env.JWT_SECRET)
+		console.log(decoded)
 
 		const userFound = await prisma.user.findUnique({
 			where: {
-				id: decoded.id
+				id: decoded.userId
 			},
 			select: userProfile
 		})
