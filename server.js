@@ -5,6 +5,8 @@ import morgan from 'morgan'
 import authRouter from './app/auth/auth.routes.js'
 import userRouter from './app/user/user.routes.js'
 import exerciseRouter from './app/exercise/exercise.routes.js'
+import workoutRouter from './app/workout/workout.routes.js'
+
 import { prisma } from './app/prisma.js'
 
 dotenv.config()
@@ -22,6 +24,7 @@ async function main() {
 	app.use('/api/auth', authRouter)
 	app.use('/api/user', userRouter)
 	app.use('/api/exercises', exerciseRouter)
+	app.use('/api/workouts', workoutRouter)
 
 	const PORT = process.env.PORT || 5000
 
